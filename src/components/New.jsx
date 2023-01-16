@@ -1,5 +1,5 @@
 import React from "react";
-import Kanye from "../assets/kanye.jpg";
+import Kanye from "../assets/yeezy.jpg";
 import {HiArrowUpRight} from 'react-icons/hi2'
 import Button from "./Button";
 
