@@ -1,8 +1,11 @@
 import React from 'react'
 import {HiArrowUpRight} from 'react-icons/hi2'
+import {AppContext} from '../context/StateContext'
+import Producto from './Producto'
 
 
 function Newseason() {
+  const {products} = AppContext()
   return (
     <div>
 
@@ -17,7 +20,12 @@ function Newseason() {
         </div>
         
     </div>
-    <p>carrousel infinito</p>
+    {products?.map((product, index) =>(
+    <Producto
+    producto = {product}
+    className="ml-10"
+    />
+    ))}
     </div>
   )
 }

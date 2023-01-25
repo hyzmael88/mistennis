@@ -19,6 +19,22 @@ export default {
         name: 'details',
         title: 'Details',
         type: 'string'
+      },
+      {
+        name: 'category',
+        title: 'Category',
+        type: 'reference',
+        to:[{
+          type: 'category'
+        }]
+      },
+      {
+        name: 'image',
+        title: 'Imagen',
+        type: 'image',
+        options:{
+          hotspot: true
+        }
       }
     ]
   }
