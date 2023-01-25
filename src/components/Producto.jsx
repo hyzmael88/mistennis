@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { client, urlFor } from "../lib/client";
 
+
 function Producto({ producto }) {
   const [category, setCategory] = useState(null);
   console.log(producto);
@@ -14,7 +15,7 @@ function Producto({ producto }) {
 console.log(category)
 
   return (
-    <div className=" mt-10 w-[250px]">
+    <div className=" mt-10 w-[300px] mr-10">
       <img src={urlFor(producto?.image)} alt="" />
      <p className="mt-6 text-sm text-gray-400 ">{category && category[0] && category[0].title}</p> 
       <div className="flex flex-row gap-8 justify-between">

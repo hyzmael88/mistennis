@@ -2,10 +2,24 @@ import React from 'react'
 import {HiArrowUpRight} from 'react-icons/hi2'
 import {AppContext} from '../context/StateContext'
 import Producto from './Producto'
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+
 
 
 function Newseason() {
   const {products} = AppContext()
+
+  const slideLeft = () => {
+    var slider = document.getElementById("slider"+ rowID);
+    slider.scrollLeft = slider.scrollLeft - 500;
+  };
+  const slideRight = () => {
+    var slider = document.getElementById("slider"+ rowID);
+    slider.scrollLeft = slider.scrollLeft + 500;
+  };
+
+
+
   return (
     <div>
 
@@ -20,12 +34,16 @@ function Newseason() {
         </div>
         
     </div>
+    <div className='flex flex-row  w-full h-full overflow-x-scroll  scroll-smooth scrollbar-hide relative'>
+    
     {products?.map((product, index) =>(
-    <Producto
-    producto = {product}
-    className="ml-10"
-    />
+
+        <Producto
+        producto = {product}
+        />
     ))}
+   
+      </div>
     </div>
   )
 }
