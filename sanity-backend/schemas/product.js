@@ -29,6 +29,17 @@ export default {
         }]
       },
       {
+        name: 'stock',
+        title: 'Stock',
+        type:'number'
+      },
+      {
+        name: 'sales',
+        title: 'Sales',
+        type: 'number'
+      },
+      
+      {
         name: 'image',
         title: 'Imagen',
         type: 'image',

@@ -1,13 +1,13 @@
 import React from "react";
 
-
+ 
 function About() {
   return (
-    <div className="flex flex-cols-2 mt-24 ">
-      <div className=" w-1/2">
-        <h2 className="uppercase text-8xl">About</h2>
+    <div className="flex flex-col text-center lg:text-start lg:flex-row mt-10 lg:mt-24 ">
+      <div className="w-full lg:w-1/2">
+        <h2 className="uppercase text-5xl mb-10 lg:mb-0 lg:text-8xl">About</h2>
       </div>
-      <div className="w-1/2 font-medium">
+      <div className="w-full lg:w-1/2 font-medium">
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever

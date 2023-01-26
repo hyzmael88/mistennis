@@ -38,10 +38,10 @@ function Navbar() {
             Mis Tennis
         </div>
         
-        <div className='flex flex-row items-center mr-8'>
+        <div className='flex flex-row items-center mr-4'>
           
-          <div className='border-2 border-black ml-4 rounded-full p-4'>
-          <HiOutlineShoppingBag className=' '/>
+          <div className='border-2 border-black ml-4 rounded-full p-3.5'>
+          <HiOutlineShoppingBag className=' text-2xl '/>
           </div>
           <div className='border-2 border-black ml-4 rounded-full p-2.5'>
 
