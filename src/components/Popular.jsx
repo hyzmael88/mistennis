@@ -43,7 +43,7 @@ function Popular() {
           id={"slider"}
           className="flex flex-row  w-full h-full overflow-x-scroll  scroll-smooth scrollbar-hide ml-4 lg:ml-10 "
         >
-          {sortedProductsPopular.map((product, index) => (
+          {sortedProductsPopular.slice(0,10).map((product, index) => (
             <Producto key={product._id} producto={product} />
           ))}
         </div>

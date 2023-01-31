@@ -1,8 +1,16 @@
 import React from "react";
 import { HiArrowUpRight } from "react-icons/hi2";
+import {AppContext} from '../context/StateContext'
 import Entries from "./Entries";
 
 function Blog() {
+  const {posts} = AppContext()
+
+  console.log(posts)
+
+  const sortedPostRecent = [...posts].sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
+
+
   return (
     <div>
       <div className="flex flex-row w-full h-full mt-20 justify-between items-center ">
@@ -14,7 +22,13 @@ function Blog() {
           </span>
         </div>
       </div>
-    <Entries/>
+      {sortedPostRecent.slice(0,4).map((post, index) =>(
+
+    <Entries
+    key={post._id}
+    post = {post}
+    />
+      ))}
     </div>
   );
 }

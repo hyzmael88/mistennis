@@ -9,21 +9,30 @@ export function StateContextProvider({ children }) {
 
 
     const [products, setProducts] = useState([])
+    const [posts, setPosts] = useState([])
 
     const getProducts = async () => {
         const query = '*[_type == "product"]'
         const products = await client.fetch(query)
         setProducts(products)
     }
+    const getPosts = async () => {
+        const query = '*[_type == "blogPost"]'
+        const posts = await client.fetch(query)
+        setPosts(posts)
+    }
 
     useEffect(() => {
         getProducts()
+        getPosts()
     }, [])
 
     return (
         <StateContext.Provider value={{
             products,
-            getProducts
+            getProducts,
+            posts,
+            getPosts
         }}>
             {children}
         </StateContext.Provider>

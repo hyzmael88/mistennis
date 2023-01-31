@@ -10,11 +10,11 @@ function Newseason() {
   const {products} = AppContext()
 
   const slideLeft = () => {
-    var slider = document.getElementById("slider");
+    var slider = document.getElementById("sliderNew");
     slider.scrollLeft = slider.scrollLeft - 500;
   };
   const slideRight = () => {
-    var slider = document.getElementById("slider");
+    var slider = document.getElementById("sliderNew");
     slider.scrollLeft = slider.scrollLeft + 500;
   };
   console.log(products)
@@ -42,11 +42,11 @@ function Newseason() {
           size={40}
           className="bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
         />
-    <div id={"slider"}
+    <div id={"sliderNew"}
      className='flex flex-row  w-full h-full overflow-x-scroll  scroll-smooth scrollbar-hide ml-4 lg:ml-10 '>
     
     
-    {sortedProductsRecent.map((product, index) =>(
+    {sortedProductsRecent.slice(0,10).map((product, index) =>(
 
         <Producto
         key={product._id}
