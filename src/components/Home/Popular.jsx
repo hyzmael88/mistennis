@@ -1,7 +1,7 @@
 import React from "react";
 import { HiArrowUpRight } from "react-icons/hi2";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { AppContext } from "../context/StateContext";
+import { AppContext } from "../../context/StateContext";
 import Producto from "./Producto";
 
 function Popular() {

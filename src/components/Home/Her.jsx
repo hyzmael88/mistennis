@@ -1,5 +1,5 @@
 import React from "react";
-import Herimg from "../assets/her.jpg";
+import Herimg from "../../assets/her.jpg";
 import {HiArrowUpRight} from 'react-icons/hi2'
 import Button from "./Button";
 

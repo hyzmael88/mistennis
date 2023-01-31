@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { client, urlFor } from "../lib/client";
+import { client, urlFor } from "../../lib/client";
 
 
 function Producto({ producto }) {

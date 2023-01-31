@@ -1,13 +1,13 @@
 import React from 'react'
-import About from '../components/About'
-import Blog from '../components/Blog'
-import Her from '../components/Her'
-import Hero from '../components/Hero'
-import Him from '../components/Him'
-import New from '../components/New'
-import Newseason from '../components/Newseason'
-import Popular from '../components/Popular'
-import Video from '../components/Video'
+import About from '../components/Home/About'
+import Blog from '../components/Home/Blog'
+import Her from '../components/Home/Her'
+import Hero from '../components/Home/Hero'
+import Him from '../components/Home/Him'
+import New from '../components/Home/New'
+import Newseason from '../components/Home/Newseason'
+import Popular from '../components/Home/Popular'
+import Video from '../components/Home/Video'
 
 function Home() {
   return (

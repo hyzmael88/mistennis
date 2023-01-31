@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { HiArrowUpRight } from "react-icons/hi2";
-import { client, urlFor } from "../lib/client";
+import { client, urlFor } from "../../lib/client";
 
 function Entries({post, key}) {
   console.log(post)

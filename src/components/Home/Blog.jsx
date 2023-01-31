@@ -1,6 +1,6 @@
 import React from "react";
 import { HiArrowUpRight } from "react-icons/hi2";
-import {AppContext} from '../context/StateContext'
+import {AppContext} from '../../context/StateContext'
 import Entries from "./Entries";
 
 function Blog() {
