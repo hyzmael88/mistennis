@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Product from '../components/Products/Product'
 import Sidebar from '../components/Products/Sidebar'
 import {AppContext} from '../context/StateContext'
 
 function Products() {
       const {products} = AppContext()
-      console.log(products)
+      
 
   return (
+    <Fragment>
+    <div className='w-full flex flex-row justify-end mt-4 pr-6 cursor-pointer '>
+        <span className='uppercase'>sort by:&nbsp;</span>
+        <span> Hight price</span>
+    </div>
     <div className='flex flex-row w-full h-full'>
         
             <Sidebar/>
@@ -24,6 +29,7 @@ function Products() {
             }
         </div>
     </div>
+    </Fragment>
   )
 }
 

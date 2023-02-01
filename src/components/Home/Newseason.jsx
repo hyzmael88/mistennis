@@ -3,6 +3,7 @@ import {HiArrowUpRight} from 'react-icons/hi2'
 import {AppContext} from '../../context/StateContext'
 import Producto from './Producto'
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 
 
@@ -29,10 +30,12 @@ function Newseason() {
     <div className='flex flex-row w-full h-full mt-20 justify-between items-center '>
         <h3 className='text-4xl ml-4 mb-16 lg:mb-0 lg:ml-0 lg:text-6xl uppercase'>New season</h3>
         <div>
+        <Link to="/products">
         <span className='hidden lg:flex flex-row border-b-[1px] border-gray-900 uppercase font-medium cursor-pointer'>
             show all &nbsp;
             <HiArrowUpRight className=" mt-2 text-xs"/>
         </span>
+        </Link>
         </div>
         
     </div>
@@ -62,9 +65,11 @@ function Newseason() {
         />
     </div>
     <div className="flex flex-col items-center lg:hidden">
+      <Link to="/products">
         <button className=" font-semibold border-2 border-black py-2 w-[90%] uppercase">
           show all
         </button>
+        </Link>
       </div>
     </div>
   )

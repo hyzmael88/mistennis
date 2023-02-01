@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { client, urlFor } from "../../lib/client";
 
 function Product({ product }) {
-  console.log(product);
+  
   const [category, setCategory] = useState(null);
   useEffect(() => {
     client
@@ -10,7 +10,7 @@ function Product({ product }) {
       .then((category) => setCategory(category));
   }, [product.category._ref]);
   return (
-    <div className="flex flex-col w-full h-full border-[0.5px] border-gray-100 ">
+    <div className="flex flex-col w-full h-full border-[0.5px] border-gray-100 cursor-pointer">
       <div className="w-[90%]">
 
       <img

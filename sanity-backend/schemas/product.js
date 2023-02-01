@@ -11,6 +11,15 @@ export default {
       }
       ,
       {
+        name: 'slug',
+        title: 'Slug',
+        type: 'slug',
+        options: {
+          source: 'name',
+          maxLength: 96
+        }
+      },
+      {
         name: 'price',
         title: 'Price',
         type: 'number'
@@ -26,6 +35,14 @@ export default {
         type: 'reference',
         to:[{
           type: 'category'
+        }]
+      },
+      {
+        name: 'gender',
+        title: 'Gender',
+        type: 'reference',
+        to:[{
+          type: 'gender'
         }]
       },
       {
