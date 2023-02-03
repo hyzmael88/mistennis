@@ -9,6 +9,7 @@ export function StateContextProvider({ children }) {
 
 
     const [products, setProducts] = useState([])
+    const [product, setProduct] = useState([])
     const [posts, setPosts] = useState([])
     const [categories, setCategories] = useState([])
 
@@ -16,6 +17,13 @@ export function StateContextProvider({ children }) {
         const query = '*[_type == "product"]'
         const products = await client.fetch(query)
         setProducts(products)
+    }
+    const getProduct = async (productSlug) => {
+        console.log(productSlug)
+        const query = `*[_type == "product" && slug.current == $productSlug]`
+        const params = {productSlug}
+        const product = await client.fetch(query, params)
+        setProduct(product)
     }
     const getPosts = async () => {
         const query = '*[_type == "blogPost"]'
@@ -41,7 +49,10 @@ export function StateContextProvider({ children }) {
             posts,
             getPosts,
             categories,
-            setCategories
+            setCategories,
+            product,
+            setProduct,
+            getProduct
         }}>
             {children}
         </StateContext.Provider>

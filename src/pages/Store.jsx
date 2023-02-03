@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
-import Product from '../components/Products/Product'
-import Sidebar from '../components/Products/Sidebar'
+import Product from '../components/Store/Product'
+import Sidebar from '../components/Store/Sidebar'
 import {AppContext} from '../context/StateContext'
 
-function Products() {
+function Store() {
       const {products} = AppContext()
       
 
@@ -33,4 +33,4 @@ function Products() {
   )
 }
 
-export default Products
+export default Store

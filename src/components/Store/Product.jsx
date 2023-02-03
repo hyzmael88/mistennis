@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { client, urlFor } from "../../lib/client";
+
 
 function Product({ product }) {
   
@@ -9,8 +11,11 @@ function Product({ product }) {
       .fetch(`*[_id == "${product.category._ref}"]`)
       .then((category) => setCategory(category));
   }, [product.category._ref]);
+  console.log(product)
   return (
-    <div className="flex flex-col w-full h-full border-[0.5px] border-gray-100 cursor-pointer">
+    <Link to={`/products/${product.slug.current} `} className="cursor-pointer">
+    
+    <div className="flex flex-col w-full h-full border-[0.5px] border-gray-100 ">
       <div className="w-[90%]">
 
       <img
@@ -32,6 +37,7 @@ function Product({ product }) {
       </div>
       </div>
     </div>
+    </Link>
   );
 }
 

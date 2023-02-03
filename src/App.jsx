@@ -6,7 +6,8 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import {StateContextProvider} from './context/StateContext'
 import { Routes, Route } from 'react-router-dom'
-import Products from './pages/Products'
+import Products from './pages/Store'
+import Product from './pages/Product'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,7 @@ function App() {
       <Routes>
       <Route path='/'  element={<Home/>}/>
       <Route path='/products'  element={<Products/>}/>
+      <Route path='/products/:productSlug'  element={<Product/>}/>
       </Routes>
      <Footer/>
 
