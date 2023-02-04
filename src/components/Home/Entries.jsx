@@ -3,7 +3,6 @@ import { HiArrowUpRight } from "react-icons/hi2";
 import { client, urlFor } from "../../lib/client";
 
 function Entries({post, key}) {
-  console.log(post)
 
   const [category, setCategory] = useState(null);
 

@@ -19,11 +19,7 @@ export default {
           maxLength: 96
         }
       },
-      {
-        name: 'price',
-        title: 'Price',
-        type: 'number'
-      },
+      
       {
         name: 'details',
         title: 'Details',
@@ -51,20 +47,19 @@ export default {
         }]
       },
       {
-        name: 'stock',
-        title: 'Stock',
-        type:'number'
+        name: 'sizes',
+        title: 'Sizes',
+        type: 'array',
+        of: [{type: 'size'}],
+        validation: Rule => Rule.required().error('Product must have at least one size'),
       },
-      {
-        name: 'sales',
-        title: 'Sales',
-        type: 'number'
-      },
+      
       
       {
         name: 'image',
         title: 'Imagen',
-        type: 'image',
+        type: 'array',
+            of:[{type: 'image'}],
         options:{
           hotspot: true
         }

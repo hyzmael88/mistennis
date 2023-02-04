@@ -1,6 +1,7 @@
 import React from 'react'
 import {FiMenu, FiSearch} from 'react-icons/fi'
 import {HiOutlineShoppingBag} from 'react-icons/hi'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
   return (
@@ -8,9 +9,11 @@ function Navbar() {
 
     
     <div className='hidden lg:flex lg:flex-row h-20 w-full justify-between items-center border-b-2 drop-shadow-xl font-semibold '>
+      <Link to='/'>
         <div className='ml-4 text-xl'>
             Mis Tennis
         </div>
+        </Link>
         <div className='flex flex-row uppercase'>
           <span className=''>For Her</span>
           <span className='ml-4'>For Him</span>
