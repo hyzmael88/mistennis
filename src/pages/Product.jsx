@@ -19,7 +19,9 @@ function Product() {
     <Fragment>
       <div className="w-full h-full flex flex-col lg:flex-row">
         <div className="w-full lg:w-2/3">
-          <Mosaic />
+          <Mosaic 
+          producto = {product[0]}
+          />
         </div>
         <div className="w-full lg:w-1/3">
           <Info

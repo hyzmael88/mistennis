@@ -5,8 +5,8 @@ import {AppContext} from '../context/StateContext'
 
 function Store() {
       const {products} = AppContext()
-      
 
+      
   return (
     <Fragment>
     <div className='w-full flex flex-row justify-end mt-4 pr-6 cursor-pointer '>

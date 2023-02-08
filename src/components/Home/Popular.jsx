@@ -16,12 +16,29 @@ function Popular() {
     var slider = document.getElementById("slider");
     slider.scrollLeft = slider.scrollLeft + 500;
   };
-  console.log(products);
+ 
 
-  const sortedProductsPopular = [...products].sort(
+  
+const sortedProductsPopular = products?.map((product) => {
+  const totalSales = product.sizes.reduce(
+    (acc, size) => acc + size.sales,
+    0
+  );
+  //reduce devuelve como resultado un valor unico
+  
+  return { ...product, totalSales };
+  
+});
+
+
+sortedProductsPopular.sort((a, b) => b.totalSales - a.totalSales);
+
+
+
+/*   const sortedProductsPopular = [...products].sort(
     (a, b) => b.sales - a.sales
   );
-  console.log(sortedProductsPopular);
+  console.log(sortedProductsPopular); */
 
   return (
     <div>

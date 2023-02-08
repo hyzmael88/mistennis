@@ -13,11 +13,28 @@ export function StateContextProvider({ children }) {
     const [posts, setPosts] = useState([])
     const [categories, setCategories] = useState([])
 
+    
+
     const getProducts = async () => {
         const query = '*[_type == "product"]'
         const products = await client.fetch(query)
-        setProducts(products)
+        const productsWMinMax = products?.map((product) => {
+       
+            const minPrice = Math.min(...product.sizes.map((size) => size.price));
+            //Math.min le puedes dar una serie de numeros y te regresa el minimo
+            const maxPrice = Math.max(...product.sizes.map((size) => size.price));
+            return { ...product,  minPrice, maxPrice };
+            
+          });
+         
+        setProducts(productsWMinMax)
     }
+
+    
+
+
+   
+
     const getProduct = async (productSlug) => {
         console.log(productSlug)
         const query = `*[_type == "product" && slug.current == $productSlug]`

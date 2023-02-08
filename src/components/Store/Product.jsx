@@ -19,7 +19,7 @@ function Product({ product }) {
       <div className="w-[90%]">
 
       <img
-        src={urlFor(product?.image)}
+        src={urlFor(product?.image[0])}
         alt="snkr"
         className="w-[250px] h-[150px] mt-24"
       />
@@ -30,7 +30,7 @@ function Product({ product }) {
           </p>
           <div className="flex flex-row w-full justify-between">
           <p className="font-semibold uppercase w-[120px]">{product?.name}</p>
-          <p className="font-semibold uppercase"> ${product?.price}</p>
+          <p className="font-semibold uppercase"> ${product?.minPrice}</p>
         </div>
         </div>
         

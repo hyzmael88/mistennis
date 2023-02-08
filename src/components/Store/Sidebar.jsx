@@ -6,12 +6,23 @@ import RangeSlider from "./RangeSlider";
 function Sidebar() {
   const {categories, products} = AppContext()
   
-  const sortedProductsPrice = [...products].sort(
-    (a, b) => a.price - b.price
+  const sortedProductsPrice = products?.map((product) => {
+  const totalSales = product.sizes.reduce(
+    (acc, size) => acc + size.sales,
+    0
   );
+  //reduce devuelve como resultado un valor unico
+  
+  return { ...product, totalSales };
+  
+});
+
+
+sortedProductsPrice.sort((a, b) => b.totalSales - a.totalSales);
+
   console.log(sortedProductsPrice)
-  const minValue = sortedProductsPrice[0]?.price
-  const maxValue = sortedProductsPrice[sortedProductsPrice.length-1]?.price
+  const minValue = sortedProductsPrice[0]?.minPrice
+  const maxValue = sortedProductsPrice[sortedProductsPrice.length-1]?.maxPrice
   console.log(minValue, maxValue)
   
 
