@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
 import { AppContext } from "../../context/StateContext";
 
-function RadioButton({categories}) {
-  console.log(categories)
 
-  const { selectedCategory, setSelectedCategory} = AppContext();
+function RadioButtonGenres({genders}) {
+  const { selectedGender, setSelectedGender} = AppContext();
 
   const handleRadioButtonChange = (e) => {
-    setSelectedCategory(e.target.value);
+    setSelectedGender(e.target.value);
   };
   return (
     
@@ -16,22 +15,22 @@ function RadioButton({categories}) {
         <input
           type="radio"
           value='All'
-          checked={selectedCategory === 'All'}
+          checked={selectedGender === 'All'}
           onChange={handleRadioButtonChange}
           className="mr-2"
         />
         All
       </label>
-    {categories?.map((category) => (
-      <label key={category._id} className="block cursor-pointer">
+    {genders?.map((gender) => (
+      <label key={gender._id} className="block cursor-pointer">
         <input
           type="radio"
-          value={category._id}
-          checked={selectedCategory === category._id}
+          value={gender._id}
+          checked={selectedGender === gender._id}
           onChange={handleRadioButtonChange}
           className="mr-2"
         />
-        {category.title}
+        {gender.gender}
       </label>
     ))}
      
@@ -42,4 +41,4 @@ function RadioButton({categories}) {
   )
 }
 
-export default RadioButton
+export default RadioButtonGenres
