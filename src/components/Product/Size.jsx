@@ -1,6 +1,7 @@
 import React from "react";
 
 function Size({ size, onClick, productSize }) {
+  console.log(productSize)
   console.log(size);
   return (
     <div onClick={onClick}

@@ -4,12 +4,10 @@ import {AppContext} from '../../context/StateContext'
 const RangeSlider = ({minValue, maxValue}) => {
 
     const midValue = maxValue/2
-    console.log(typeof(midValue))
     
   const [value, setValue] = useState(
      midValue  );
   
-     console.log(value)
 
  
 

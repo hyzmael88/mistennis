@@ -1,10 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Size from "./Size";
+import { AppContext } from "../../context/StateContext";
+
 
 function Info({ producto }) {
-  console.log(producto);
+  const {addCart} = AppContext()
+  const [productSize, setProductSize] = useState(null);
+  
+  useEffect(() => {
+    if(producto){
 
-  const [productSize, setProductSize] = useState(producto?.sizes[0]);
+      setProductSize(producto.sizes[0])
+    }
+    
+  }, [producto])
+  
+
+  
+  
+  console.log(productSize)
 
   const handleSizeClick = (size) => {
     setProductSize(size);
@@ -28,7 +42,7 @@ function Info({ producto }) {
           <p className="uppercase font-semibold text-sm">size</p>
           <p className="text-4xl cursor-pointer">-</p>
         </div>
-        <div className="grid grid-cols-4 gap-y-4 place-items-center w-full">
+        <div className="grid grid-cols-4 gap-y-4 place-items-center w-full my-6">
           {producto?.sizes.map((size, index) => (
             <Size size={size} onClick={() => handleSizeClick(size)}
             productSize={productSize}
@@ -45,7 +59,9 @@ function Info({ producto }) {
         {producto?.description}
       </div>
       <div className="w-full">
-        <button className="w-full h-10 bg-black text-white uppercase font-bold mt-4">
+        <button
+        /* onClick={addCart(producto, productSize)} */
+        className="w-full h-10 bg-black text-white uppercase font-bold mt-4">
           Add to bag
         </button>
       </div>

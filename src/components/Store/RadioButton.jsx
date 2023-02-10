@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { AppContext } from "../../context/StateContext";
 
 function RadioButton({categories}) {
-  console.log(categories)
 
   const { selectedCategory, setSelectedCategory} = AppContext();
 

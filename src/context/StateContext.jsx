@@ -9,17 +9,22 @@ export function StateContextProvider({ children }) {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
+  const [cart, setCart] = useState([])
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedGender, setSelectedGender] = useState("All");
-
-  console.log("categoria seleccionada", selectedCategory);
+  const options = ["Recent", "Popular", "Higher Price", "Lower Price"];
+  const [selectedOption, setSelectedOption] = useState(options[0]);
 
   const getProducts = async () => {
     const query = '*[_type == "product"]';
     const products = await client.fetch(query);
-    const productsWMinMax = products?.map((product) => {
+    const sortedProductsRecent = [...products].sort(
+      (a, b) => new Date(b._createdAt) - new Date(a._createdAt)
+    );
+
+    const productsWMinMax = sortedProductsRecent?.map((product) => {
       const minPrice = Math.min(...product.sizes.map((size) => size.price));
       //Math.min le puedes dar una serie de numeros y te regresa el minimo
       const maxPrice = Math.max(...product.sizes.map((size) => size.price));
@@ -27,6 +32,7 @@ export function StateContextProvider({ children }) {
     });
 
     setProducts(productsWMinMax);
+    console.log(products);
   };
 
   const getProduct = async (productSlug) => {
@@ -51,6 +57,9 @@ export function StateContextProvider({ children }) {
     const genders = await client.fetch(query);
     setGenders(genders);
   };
+  const addCart = (product) =>{
+    setCart([...cart,product])
+  }
 
   useEffect(() => {
     getProducts();
@@ -73,9 +82,28 @@ export function StateContextProvider({ children }) {
         (product) => product.gender._ref === selectedGender
       );
     }
-    console.log(filteredProducts);
+    if (selectedOption == "Popular") {
+      filteredProducts = filteredProducts.map((product) => {
+        const totalSales = product.sizes.reduce(
+          (acc, size) => acc + size.sales,
+          0
+        );
+        //reduce devuelve como resultado un valor unico
+
+        return { ...product, totalSales };
+      });
+
+      filteredProducts.sort((a, b) => b.totalSales - a.totalSales);
+    }
+    if(selectedOption == 'Higher Price'){
+      filteredProducts.sort((a, b) => b.maxPrice - a.maxPrice);
+    }
+    if(selectedOption == 'Lower Price'){
+      filteredProducts.sort((a, b) => a.maxPrice - b.maxPrice);
+    }
+   console.log(filteredProducts)
     setFilteredProducts(filteredProducts);
-  }, [selectedCategory, selectedGender, products]);
+  }, [selectedCategory, selectedGender, products, selectedOption]);
 
   return (
     <StateContext.Provider
@@ -96,6 +124,12 @@ export function StateContextProvider({ children }) {
         setSelectedCategory,
         selectedGender,
         setSelectedGender,
+        selectedOption,
+        setSelectedOption,
+        options,
+        cart,
+        setCart,
+        addCart
       }}
     >
       {children}

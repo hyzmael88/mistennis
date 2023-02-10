@@ -6,7 +6,6 @@ import { client, urlFor } from "../../lib/client";
 function Producto({ producto }) {
   const [category, setCategory] = useState(null);
  
-  console.log(producto)
 
   useEffect(() => {
     client

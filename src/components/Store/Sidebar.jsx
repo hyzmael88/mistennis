@@ -15,11 +15,11 @@ function Sidebar() {
   });
   sortedProductsPrice.sort((a, b) => b.totalSales - a.totalSales);
 
-  console.log(sortedProductsPrice);
   const minValue = sortedProductsPrice[0]?.minPrice;
   const maxValue =
-    sortedProductsPrice[sortedProductsPrice.length - 1]?.maxPrice;
-  console.log(minValue, maxValue);
+  products.reduce((max, product) => {
+    return Math.max(max, product.maxPrice);
+  }, 0);
 
   
 

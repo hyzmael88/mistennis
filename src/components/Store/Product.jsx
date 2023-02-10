@@ -11,7 +11,6 @@ function Product({ product }) {
       .fetch(`*[_id == "${product.category._ref}"]`)
       .then((category) => setCategory(category));
   }, [product.category._ref]);
-  console.log(product)
   return (
     <Link to={`/products/${product.slug.current} `} className="cursor-pointer">
     

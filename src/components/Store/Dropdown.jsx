@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import {BsChevronDown} from 'react-icons/bs'
+import { AppContext } from "../../context/StateContext";
+
 
 
 const Dropdown = () => {
-  const options = ['High Price', 'Lower Price', 'Recent', 'Popular'];
+  
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const { selectedOption, setSelectedOption, options} = AppContext();
 
   const toggleDropdown = () => setIsOpen(!isOpen);
 
