@@ -11,11 +11,18 @@ export function StateContextProvider({ children }) {
   const [genders, setGenders] = useState([]);
   const [cart, setCart] = useState([])
 
+
+  //store
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedGender, setSelectedGender] = useState("All");
   const options = ["Recent", "Popular", "Higher Price", "Lower Price"];
   const [selectedOption, setSelectedOption] = useState(options[0]);
+
+  //Auth
+  const [error, setError] = useState(null)
+  const [userResponse, setUserResponse] = useState(null)
+  const [facebookResponse, setFacebookResponse] = useState(null)
 
   const getProducts = async () => {
     const query = '*[_type == "product"]';
@@ -32,7 +39,6 @@ export function StateContextProvider({ children }) {
     });
 
     setProducts(productsWMinMax);
-    console.log(products);
   };
 
   const getProduct = async (productSlug) => {
@@ -57,9 +63,25 @@ export function StateContextProvider({ children }) {
     const genders = await client.fetch(query);
     setGenders(genders);
   };
-  const addCart = (product) =>{
-    setCart([...cart,product])
+
+  function getProductWithSelectedSize(product, productSize) {
+    const selectedSize = product.sizes.find(size => size === productSize);
+  
+    if (!selectedSize) {
+      return null;
+    }
+  
+    return { ...product, productSizes: [selectedSize] };
   }
+  function addCart(product, productSize) {
+  const selectedProduct = getProductWithSelectedSize(product, productSize);
+
+  if (!selectedProduct) {
+    return;
+  }
+
+  setCart(prevCart => [...prevCart, selectedProduct]);
+}
 
   useEffect(() => {
     getProducts();
@@ -101,7 +123,6 @@ export function StateContextProvider({ children }) {
     if(selectedOption == 'Lower Price'){
       filteredProducts.sort((a, b) => a.maxPrice - b.maxPrice);
     }
-   console.log(filteredProducts)
     setFilteredProducts(filteredProducts);
   }, [selectedCategory, selectedGender, products, selectedOption]);
 
@@ -129,7 +150,13 @@ export function StateContextProvider({ children }) {
         options,
         cart,
         setCart,
-        addCart
+        error,
+        setError,
+        addCart,
+        userResponse,
+        setUserResponse,
+        facebookResponse,
+        setFacebookResponse
       }}
     >
       {children}

@@ -18,12 +18,10 @@ function Info({ producto }) {
 
   
   
-  console.log(productSize)
 
   const handleSizeClick = (size) => {
     setProductSize(size);
   };
-  console.log("el tamano que recibi", productSize);
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -60,7 +58,7 @@ function Info({ producto }) {
       </div>
       <div className="w-full">
         <button
-        /* onClick={addCart(producto, productSize)} */
+         onClick={() => addCart(producto, productSize)} 
         className="w-full h-10 bg-black text-white uppercase font-bold mt-4">
           Add to bag
         </button>

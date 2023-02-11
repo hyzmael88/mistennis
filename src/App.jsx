@@ -8,6 +8,8 @@ import {StateContextProvider} from './context/StateContext'
 import { Routes, Route } from 'react-router-dom'
 import Products from './pages/Store'
 import Product from './pages/Product'
+import Auth from './pages/Auth/Auth'
+import Shopping from './components/Shopping/Shopping'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,7 +20,9 @@ function App() {
     <div className='2xl:max-w-[1280px] w-full h-full mx-auto overflow-hidden'>
       <Navbar/>
       <Routes>
-      <Route path='/'  element={<Home/>}/>
+      <Route path='/'  element={<Home/>}/> 
+      <Route path='/auth'  element={<Auth/>}/> 
+      <Route path='/shopping'  element={<Shopping/>}/> 
       <Route path='/products'  element={<Products/>}/>
       <Route path='/products/:productSlug'  element={<Product/>}/>
       </Routes>

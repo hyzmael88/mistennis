@@ -18,7 +18,7 @@ function Newseason() {
     var slider = document.getElementById("sliderNew");
     slider.scrollLeft = slider.scrollLeft + 500;
   };
-  console.log(products)
+
 
   var sortedProducts = products?.map((product) => {
    

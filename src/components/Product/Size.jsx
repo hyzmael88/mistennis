@@ -1,8 +1,7 @@
 import React from "react";
 
 function Size({ size, onClick, productSize }) {
-  console.log(productSize)
-  console.log(size);
+
   return (
     <div onClick={onClick}
      className={`flex flex-row justify-center font-semibold items-center border-2
