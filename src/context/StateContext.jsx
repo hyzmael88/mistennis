@@ -24,6 +24,8 @@ export function StateContextProvider({ children }) {
   const [userResponse, setUserResponse] = useState(null)
   const [facebookResponse, setFacebookResponse] = useState(null)
 
+
+  //Home
   const getProducts = async () => {
     const query = '*[_type == "product"]';
     const products = await client.fetch(query);
@@ -64,6 +66,8 @@ export function StateContextProvider({ children }) {
     setGenders(genders);
   };
 
+
+  //Cart
   function getProductWithSelectedSize(product, productSize) {
     const selectedSize = product.sizes.find(size => size === productSize);
   
@@ -83,6 +87,7 @@ export function StateContextProvider({ children }) {
   setCart(prevCart => [...prevCart, selectedProduct]);
 }
 
+//Home
   useEffect(() => {
     getProducts();
     getPosts();
@@ -90,6 +95,28 @@ export function StateContextProvider({ children }) {
     getGenders();
   }, []);
 
+  //Auth
+  function createFacebookUser (userResponse) {
+    client.create({
+      type: 'user',
+      name: userResponse?.name,
+      email: userResponse?.email,
+      facebookId: userResponse?.id,
+      picture: userResponse?.picture.data.url,
+      registerDate: new Date()
+    }).then(result => {
+      console.log('Successfully created user', result)
+    }).catch(error => {
+      console.error('Error creating user', error)
+    })
+  }
+  useEffect(() => {
+    createFacebookUser(userResponse)
+
+  }, [userResponse])
+  
+
+  //Store
   useEffect(() => {
     let filteredProducts = [...products];
 

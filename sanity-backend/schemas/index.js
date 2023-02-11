@@ -6,5 +6,7 @@ import category from './category'
 import product from './product'
 import gender from './gender'
 import { size } from './size'
+import user from './user'
 
-export const schemaTypes = [product, size, category, gender, blogAuthor,blogCategories, blogPost ]
+export const schemaTypes = [product, size, category, gender, blogAuthor,
+    blogCategories, blogPost, user]
