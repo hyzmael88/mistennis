@@ -1,14 +1,14 @@
-export default{
+export default {
     name: 'facebookUser',
     type: 'document',
     title: 'Facebook User',
     hooks: {
         async create(user) {
-          user.registerDate = new Date();
+            user.registerDate = new Date();
         }
-      },
-    
-    fields:[
+    },
+
+    fields: [
         {
             name: 'name',
             title: 'Name',
@@ -33,6 +33,7 @@ export default{
             name: 'registerDate',
             title: 'Register Date',
             type: 'datetime'
-          }
+        },
+       
     ]
 }
