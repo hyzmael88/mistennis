@@ -9,8 +9,7 @@ export function StateContextProvider({ children }) {
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
-  const [cart, setCart] = useState([])
-
+  const [cart, setCart] = useState([]);
 
   //store
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -20,10 +19,10 @@ export function StateContextProvider({ children }) {
   const [selectedOption, setSelectedOption] = useState(options[0]);
 
   //Auth
-  const [error, setError] = useState(null)
-  const [userResponse, setUserResponse] = useState(null)
-  const [facebookResponse, setFacebookResponse] = useState(null)
-
+  const [error, setError] = useState(null);
+  const [userResponse, setUserResponse] = useState(null);
+  const [facebookResponse, setFacebookResponse] = useState(null);
+  const [facebookUser, setFacebookUser] = useState(null);
 
   //Home
   const getProducts = async () => {
@@ -50,6 +49,13 @@ export function StateContextProvider({ children }) {
     const product = await client.fetch(query, params);
     setProduct(product);
   };
+  const getFacebookUser = async (id) => {
+    const query = `*[_type == "faceBookUser" && facebookId == $id]`;
+    const params = { id };
+    const user = await client.fetch(query, params);
+    console.log('dentro de getFacebookUser', user)
+    setFacebookUser(user);
+  };
   const getPosts = async () => {
     const query = '*[_type == "blogPost"]';
     const posts = await client.fetch(query);
@@ -66,28 +72,27 @@ export function StateContextProvider({ children }) {
     setGenders(genders);
   };
 
-
   //Cart
   function getProductWithSelectedSize(product, productSize) {
-    const selectedSize = product.sizes.find(size => size === productSize);
-  
+    const selectedSize = product.sizes.find((size) => size === productSize);
+
     if (!selectedSize) {
       return null;
     }
-  
+
     return { ...product, productSizes: [selectedSize] };
   }
   function addCart(product, productSize) {
-  const selectedProduct = getProductWithSelectedSize(product, productSize);
+    const selectedProduct = getProductWithSelectedSize(product, productSize);
 
-  if (!selectedProduct) {
-    return;
+    if (!selectedProduct) {
+      return;
+    }
+
+    setCart((prevCart) => [...prevCart, selectedProduct]);
   }
 
-  setCart(prevCart => [...prevCart, selectedProduct]);
-}
-
-//Home
+  //Home
   useEffect(() => {
     getProducts();
     getPosts();
@@ -96,24 +101,38 @@ export function StateContextProvider({ children }) {
   }, []);
 
   //Auth
-  function createFacebookUser (userResponse) {
-    client.create({
-      type: 'user',
-      name: userResponse?.name,
-      email: userResponse?.email,
-      facebookId: userResponse?.id,
-      picture: userResponse?.picture.data.url,
-      registerDate: new Date()
-    }).then(result => {
-      console.log('Successfully created user', result)
-    }).catch(error => {
-      console.error('Error creating user', error)
-    })
+  function createFacebookUser(userResponse) {
+    client
+      .create({
+        _type: "facebookUser",
+        name: userResponse?.name,
+        email: userResponse?.email,
+        facebookId: userResponse?.id,
+        picture: userResponse?.picture.data.url,
+        registerDate: new Date(),
+      })
+      .then((result) => {
+        console.log("Successfully created user", result);
+      })
+      .catch((error) => {
+        console.error("Error creating user", error);
+      });
   }
   useEffect(() => {
-    createFacebookUser(userResponse)
+    if (userResponse) {
+      getFacebookUser(userResponse.id);
+      localStorage.setItem("facebookUser", JSON.stringify(userResponse));
 
-  }, [userResponse])
+    }
+  }, [userResponse]);
+  
+  useEffect(() => {
+    if (facebookUser != null) {
+      createFacebookUser(userResponse);
+
+    } 
+    
+  }, [facebookUser]);
   
 
   //Store
@@ -144,10 +163,10 @@ export function StateContextProvider({ children }) {
 
       filteredProducts.sort((a, b) => b.totalSales - a.totalSales);
     }
-    if(selectedOption == 'Higher Price'){
+    if (selectedOption == "Higher Price") {
       filteredProducts.sort((a, b) => b.maxPrice - a.maxPrice);
     }
-    if(selectedOption == 'Lower Price'){
+    if (selectedOption == "Lower Price") {
       filteredProducts.sort((a, b) => a.maxPrice - b.maxPrice);
     }
     setFilteredProducts(filteredProducts);
@@ -183,7 +202,7 @@ export function StateContextProvider({ children }) {
         userResponse,
         setUserResponse,
         facebookResponse,
-        setFacebookResponse
+        setFacebookResponse,
       }}
     >
       {children}

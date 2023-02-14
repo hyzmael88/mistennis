@@ -1,7 +1,12 @@
 export default{
-    name: 'user',
+    name: 'facebookUser',
     type: 'document',
-    title: 'User',
+    title: 'Facebook User',
+    hooks: {
+        async create(user) {
+          user.registerDate = new Date();
+        }
+      },
     
     fields:[
         {

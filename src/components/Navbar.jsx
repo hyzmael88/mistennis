@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {FiMenu, FiSearch} from 'react-icons/fi'
 import {HiOutlineShoppingBag} from 'react-icons/hi'
 import { Link } from 'react-router-dom'
@@ -8,8 +8,14 @@ import Cart from './Cart/Cart';
 
 
 function Navbar() {
-  const {userResponse, facebookResponse} = AppContext();
+  const [userResponse, setUserResponse] = useState(null)
+  useEffect(() => {
+    const storedData = localStorage.getItem("facebookUser");
+   setUserResponse( storedData ? JSON.parse(storedData) : null)
   console.log(userResponse)
+  }, [])
+  
+  
 
   
   return (
