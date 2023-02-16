@@ -34,6 +34,13 @@ export default {
             title: 'Register Date',
             type: 'datetime'
         },
+        {
+            name: 'cart',
+            title: 'Cart',
+            type: 'reference',
+            to: [{type: 'cart'}]
+            
+        }
        
     ]
 }

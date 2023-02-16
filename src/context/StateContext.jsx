@@ -10,6 +10,7 @@ export function StateContextProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
   const [cart, setCart] = useState([]);
+  console.log(cart)
 
   //store
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -23,6 +24,7 @@ export function StateContextProvider({ children }) {
   const [userResponse, setUserResponse] = useState(null);
   const [facebookResponse, setFacebookResponse] = useState(null);
   const [facebookUser, setFacebookUser] = useState(null);
+  console.log(facebookUser)
 
   //Home
   const getProducts = async () => {
@@ -56,6 +58,7 @@ export function StateContextProvider({ children }) {
     console.log('dentro de getFacebookUser', user)
     setFacebookUser(user);
   };
+  
   const getPosts = async () => {
     const query = '*[_type == "blogPost"]';
     const posts = await client.fetch(query);
@@ -80,7 +83,7 @@ export function StateContextProvider({ children }) {
       return null;
     }
 
-    return { ...product, productSizes: [selectedSize] };
+    return { ...product, productSizeSelected: [selectedSize] };
   }
   function addCart(product, productSize) {
     const selectedProduct = getProductWithSelectedSize(product, productSize);
@@ -90,6 +93,7 @@ export function StateContextProvider({ children }) {
     }
 
     setCart((prevCart) => [...prevCart, selectedProduct]);
+
   }
 
   //Home
@@ -122,17 +126,30 @@ export function StateContextProvider({ children }) {
     if (userResponse) {
       getFacebookUser(userResponse.id);
       localStorage.setItem("facebookUser", JSON.stringify(userResponse));
-
+      
     }
   }, [userResponse]);
   
   useEffect(() => {
     if (facebookUser != null) {
       createFacebookUser(userResponse);
+      
 
     } 
     
   }, [facebookUser]);
+
+
+
+  //cart
+  useEffect(() => {
+    
+  if(cart){
+
+  }
+   
+  }, [cart])
+  
   
 
   //Store
@@ -203,6 +220,8 @@ export function StateContextProvider({ children }) {
         setUserResponse,
         facebookResponse,
         setFacebookResponse,
+        facebookUser,
+        setFacebookUser
       }}
     >
       {children}
