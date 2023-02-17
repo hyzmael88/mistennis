@@ -86,13 +86,15 @@ export function StateContextProvider({ children }) {
     return { ...product, productSizeSelected: [selectedSize] };
   }
   function addCart(product, productSize) {
-    const selectedProduct = getProductWithSelectedSize(product, productSize);
+   /*  const selectedProduct = getProductWithSelectedSize(product, productSize);
 
     if (!selectedProduct) {
       return;
     }
 
-    setCart((prevCart) => [...prevCart, selectedProduct]);
+    setCart((prevCart) => [...prevCart, selectedProduct]); */
+
+    
 
   }
 
