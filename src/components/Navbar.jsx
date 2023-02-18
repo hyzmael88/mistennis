@@ -8,13 +8,14 @@ import Cart from './Cart/Cart';
 
 
 function Navbar() {
+
   const [userResponse, setUserResponse] = useState(null)
   useEffect(() => {
     const storedData = localStorage.getItem("facebookUser");
    setUserResponse( storedData ? JSON.parse(storedData) : null)
-  console.log(userResponse)
-  }, [])
   
+  }, [])
+  console.log(userResponse)
   
 
   

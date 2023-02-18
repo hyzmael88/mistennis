@@ -1,5 +1,5 @@
 import React from 'react'
-import LoginFacebook from './LoginFacebook'
+import LoginFacebook2 from './LoginFacebook2'
 
 function Auth() {
   return (
@@ -64,7 +64,7 @@ function Auth() {
                   /> 
                   <label className="mt-4 cursor-pointer ">Facebook</label>
                   */}
-                  <LoginFacebook/>
+                  <LoginFacebook2/>
                 </div>
                 
               </div>

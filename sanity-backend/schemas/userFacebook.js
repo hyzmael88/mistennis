@@ -1,7 +1,7 @@
 export default{
-    name: 'user',
+    name: 'facebookUser',
     type: 'document',
-    title: 'User',
+    title: 'Facebook User',
     hooks: {
         async create(user) {
           user.registerDate = new Date();
@@ -19,8 +19,16 @@ export default{
             title: 'Email',
             type: 'email',
         },
-        
-       
+        {
+            name: 'facebookId',
+            title: 'Facebook ID',
+            type: 'string',
+        },
+        {
+            name: 'picture',
+            title: 'Picture',
+            type: 'string'
+        },
         {
             name: 'registerDate',
             title: 'Register Date',

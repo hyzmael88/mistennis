@@ -10,8 +10,8 @@ export function StateContextProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
   const [cart, setCart] = useState([]);
-  console.log(cart)
-
+/*   console.log(cart)
+ */
   //store
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -56,7 +56,14 @@ export function StateContextProvider({ children }) {
     const params = { id };
     const user = await client.fetch(query, params);
     console.log('dentro de getFacebookUser', user)
-    setFacebookUser(user);
+  
+    if (user == null) {
+      console.log('no encontré el usuario');
+      return null;
+    } else {
+      console.log('encontré el usuario:', user);
+      return user;
+    }
   };
   
   const getPosts = async () => {
@@ -124,33 +131,32 @@ export function StateContextProvider({ children }) {
         console.error("Error creating user", error);
       });
   }
+
   useEffect(() => {
+    console.log(userResponse)
     if (userResponse) {
-      getFacebookUser(userResponse.id);
-      localStorage.setItem("facebookUser", JSON.stringify(userResponse));
-      
+      // Intenta buscar al usuario en la base de datos
+      getFacebookUser(userResponse.id)
+        .then((result) => {
+          // Si se encontró al usuario, lo guardamos en el estado y en el local storage
+          setFacebookUser(result);
+          localStorage.setItem("facebookUser", JSON.stringify(result));
+        })
+        .catch((error) => {
+          // Si no se encontró al usuario, lo creamos y lo guardamos en el estado y en el local storage
+          createFacebookUser(userResponse)
+            .then((result) => {
+              setFacebookUser(result);
+              localStorage.setItem("facebookUser", JSON.stringify(result));
+            })
+            .catch((error) => {
+              console.error("Error creating user", error);
+            });
+        });
     }
   }, [userResponse]);
-  
-  useEffect(() => {
-    if (facebookUser != null) {
-      createFacebookUser(userResponse);
-      
 
-    } 
-    
-  }, [facebookUser]);
-
-
-
-  //cart
-  useEffect(() => {
-    
-  if(cart){
-
-  }
-   
-  }, [cart])
+ 
   
   
 

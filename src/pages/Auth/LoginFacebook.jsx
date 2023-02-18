@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
+
 function LoginFacebook() {
     const {userResponse, setUserResponse, facebookResponse, setFacebookResponse, error, setError} = AppContext();
     const navigate = useNavigate();
@@ -22,7 +23,8 @@ function LoginFacebook() {
         return <div className=''>
             <FacebookLogin
   appId="867570441004969"
-  children={<div className='flex flex-row items-center'>
+/*   appId="936778880823804"
+ */  children={<div className='flex flex-row items-center'>
     <BsFacebook className='text-xl mr-3'/>
     Facebook Login
   </div>}

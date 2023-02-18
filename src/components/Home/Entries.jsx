@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { HiArrowUpRight } from "react-icons/hi2";
 import { client, urlFor } from "../../lib/client";
 
-function Entries({post, key}) {
+function Entries({post}) {
 
   const [category, setCategory] = useState(null);
 

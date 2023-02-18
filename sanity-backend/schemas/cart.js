@@ -3,12 +3,7 @@ export default {
     type: 'document',
     title: 'Cart',
     fields: [
-      {
-        name: 'user',
-        title: 'User',
-        type: 'reference',
-        to: [{ type: 'facebookUser' }]
-      },
+     
       {
         name: 'items',
         title: 'Items',
