@@ -84,7 +84,7 @@ export function StateContextProvider({ children }) {
   };
 
   //Cart
-  function getProductWithSelectedSize(product, productSize) {
+ /*  function getProductWithSelectedSize(product, productSize) {
     const selectedSize = product.sizes.find((size) => size === productSize);
 
     if (!selectedSize) {
@@ -92,16 +92,41 @@ export function StateContextProvider({ children }) {
     }
 
     return { ...product, productSizeSelected: [selectedSize] };
-  }
-  function addCart(product, productSize) {
-    /*  const selectedProduct = getProductWithSelectedSize(product, productSize);
-
-    if (!selectedProduct) {
-      return;
+  } */
+  const addCart = (product, productSize) => {
+    const storedData = JSON.parse(localStorage.getItem("facebookUser"));
+    if (storedData) {
+      const userId = storedData.id;
+      getFacebookUser(userId).then((user) => {
+        if (user) {
+          const cartItem = {
+            product: product,
+            productSize: productSize,
+            quantity: 1
+          };
+          let cart = user.cart || [];
+          let existingCartItemIndex = cart.findIndex(
+            (item) => item.product._id === product._id && item.productSize === productSize
+          );
+          if (existingCartItemIndex > -1) {
+            cart[existingCartItemIndex].quantity++;
+          } else {
+            cart.push(cartItem);
+          }
+          user.cart = cart;
+          updateFacebookUser(user).then((result) => {
+            if (result) {
+              setFacebookUser(result);
+              localStorage.setItem("facebookUser", JSON.stringify(result));
+            }
+          });
+        }
+      });
     }
+  };
 
-    setCart((prevCart) => [...prevCart, selectedProduct]); */
-  }
+  //TODO updateFacebookUser
+  
 
   //Home
   useEffect(() => {
@@ -110,6 +135,14 @@ export function StateContextProvider({ children }) {
     getCategories();
     getGenders();
   }, []);
+
+  //Cart
+  useEffect(() => {
+    console.log('se modifico el carrito', cart)
+  
+    
+  }, [cart])
+  
 
   //Auth
   function createFacebookUser(userResponse) {
@@ -222,6 +255,7 @@ export function StateContextProvider({ children }) {
         setFacebookResponse,
         facebookUser,
         setFacebookUser,
+        getFacebookUser
       }}
     >
       {children}
