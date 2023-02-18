@@ -10,8 +10,8 @@ export function StateContextProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
   const [cart, setCart] = useState([]);
-/*   console.log(cart)
- */
+  /*   console.log(cart)
+   */
   //store
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -24,7 +24,7 @@ export function StateContextProvider({ children }) {
   const [userResponse, setUserResponse] = useState(null);
   const [facebookResponse, setFacebookResponse] = useState(null);
   const [facebookUser, setFacebookUser] = useState(null);
-  console.log(facebookUser)
+  console.log(facebookUser);
 
   //Home
   const getProducts = async () => {
@@ -52,20 +52,21 @@ export function StateContextProvider({ children }) {
     setProduct(product);
   };
   const getFacebookUser = async (id) => {
-    const query = `*[_type == "faceBookUser" && facebookId == $id]`;
+    console.log("id dentro de getFacebooUser", id);
+    const query = `*[_type == "facebookUser" && facebookId == $id]`;
     const params = { id };
     const user = await client.fetch(query, params);
-    console.log('dentro de getFacebookUser', user)
-  
-    if (user == null) {
-      console.log('no encontré el usuario');
+    console.log("dentro de getFacebookUser", user);
+
+    if (user.length == 0) {
+      console.log("no encontré el usuario");
       return null;
     } else {
-      console.log('encontré el usuario:', user);
+      console.log("encontré el usuario:", user);
       return user;
     }
   };
-  
+
   const getPosts = async () => {
     const query = '*[_type == "blogPost"]';
     const posts = await client.fetch(query);
@@ -93,16 +94,13 @@ export function StateContextProvider({ children }) {
     return { ...product, productSizeSelected: [selectedSize] };
   }
   function addCart(product, productSize) {
-   /*  const selectedProduct = getProductWithSelectedSize(product, productSize);
+    /*  const selectedProduct = getProductWithSelectedSize(product, productSize);
 
     if (!selectedProduct) {
       return;
     }
 
     setCart((prevCart) => [...prevCart, selectedProduct]); */
-
-    
-
   }
 
   //Home
@@ -122,6 +120,7 @@ export function StateContextProvider({ children }) {
         email: userResponse?.email,
         facebookId: userResponse?.id,
         picture: userResponse?.picture.data.url,
+        cart: [],
         registerDate: new Date(),
       })
       .then((result) => {
@@ -133,32 +132,25 @@ export function StateContextProvider({ children }) {
   }
 
   useEffect(() => {
-    console.log(userResponse)
+    console.log(userResponse);
     if (userResponse) {
+      console.log("entre al if");
       // Intenta buscar al usuario en la base de datos
-      getFacebookUser(userResponse.id)
-        .then((result) => {
+      getFacebookUser(userResponse.id).then((result) => {
+        if (result) {
           // Si se encontró al usuario, lo guardamos en el estado y en el local storage
-          setFacebookUser(result);
-          localStorage.setItem("facebookUser", JSON.stringify(result));
-        })
-        .catch((error) => {
-          // Si no se encontró al usuario, lo creamos y lo guardamos en el estado y en el local storage
-          createFacebookUser(userResponse)
-            .then((result) => {
-              setFacebookUser(result);
-              localStorage.setItem("facebookUser", JSON.stringify(result));
-            })
-            .catch((error) => {
-              console.error("Error creating user", error);
-            });
-        });
+          console.log(result[0]);
+          setFacebookUser(result[0]);
+          localStorage.setItem("facebookUser", JSON.stringify(result[0]));
+        } else {
+          createFacebookUser(userResponse);
+
+          setFacebookUser(userResponse);
+          localStorage.setItem("facebookUser", JSON.stringify(userResponse));
+        }
+      });
     }
   }, [userResponse]);
-
- 
-  
-  
 
   //Store
   useEffect(() => {
@@ -229,7 +221,7 @@ export function StateContextProvider({ children }) {
         facebookResponse,
         setFacebookResponse,
         facebookUser,
-        setFacebookUser
+        setFacebookUser,
       }}
     >
       {children}

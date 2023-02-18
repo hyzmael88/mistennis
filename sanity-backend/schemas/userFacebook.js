@@ -37,8 +37,26 @@ export default{
           {
             name: 'cart',
             title: 'Cart',
-            type: 'reference',
-            to: [{type: 'cart'}],
+            type: 'array',
+            of: [{
+              type: 'object',
+              fields: [
+                {
+                  name: 'product',
+                  type: 'reference',
+                  to: [{type: 'product'}]
+                },
+                {
+                  name: 'size',
+                  type: 'reference',
+                  to: [{type: 'size'}]
+                },
+                {
+                  name: 'quantity',
+                  type: 'number'
+                }
+              ]
+            }]
           }
     ]
 }

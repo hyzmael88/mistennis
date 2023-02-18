@@ -8,14 +8,16 @@ import Cart from './Cart/Cart';
 
 
 function Navbar() {
-
-  const [userResponse, setUserResponse] = useState(null)
-  useEffect(() => {
-    const storedData = localStorage.getItem("facebookUser");
-   setUserResponse( storedData ? JSON.parse(storedData) : null)
   
-  }, [])
-  console.log(userResponse)
+  const {facebookUser} = AppContext()
+  const [user, setUser] = useState(null)
+  useEffect(() => {
+    console.log(facebookUser)
+    const storedData = localStorage.getItem("facebookUser");
+   setUser( storedData ? JSON.parse(storedData) : null) 
+  
+  }, [facebookUser])
+  
   
 
   
@@ -42,14 +44,18 @@ function Navbar() {
             <FiSearch className='mt-1' />
           </div>
           {
-            userResponse?
+            user?
             <p className='flex flex-row items-center justify-center'>
                <img
-        src={userResponse.picture.data.url}
+        src={user?.picture ? 
+        user.picture
+        :
+        user.picture.data.url
+        }
         alt="Profile picture"
         className="w-[30px] h-[30px]  rounded-full ml-4 mt-1 mr-3"
       />
-              {userResponse.name}</p>
+              {user.name}</p>
             :
             <Link to='auth'>
           <div className='ml-4 uppercase cursor-pointer'>

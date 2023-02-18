@@ -6,7 +6,6 @@ import Entries from "./Entries";
 function Blog() {
   const {posts} = AppContext()
 
-  console.log(posts)
 
   const sortedPostRecent = [...posts].sort((a, b) => new Date(b._createdAt) - new Date(a._createdAt));
 
