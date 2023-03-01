@@ -56,7 +56,8 @@ export default{
                   type: 'number'
                 }
               ]
-            }]
+            }],
+            _key: 'id'
           }
     ]
 }

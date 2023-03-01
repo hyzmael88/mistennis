@@ -63,7 +63,7 @@ export function StateContextProvider({ children }) {
       return null;
     } else {
       console.log("encontré el usuario:", user);
-      return user;
+      return user[0];
     }
   };
 
@@ -94,26 +94,31 @@ export function StateContextProvider({ children }) {
     return { ...product, productSizeSelected: [selectedSize] };
   } */
   const addCart = (product, productSize) => {
+    console.log(product, productSize)
     const storedData = JSON.parse(localStorage.getItem("facebookUser"));
     if (storedData) {
-      const userId = storedData.id;
+      const userId = storedData.facebookId;
       getFacebookUser(userId).then((user) => {
+        console.log(user)
         if (user) {
           const cartItem = {
+            id: `${product._id}-${productSize._key}`,
             product: product,
-            productSize: productSize,
+            size: productSize,
             quantity: 1
           };
           let cart = user.cart || [];
           let existingCartItemIndex = cart.findIndex(
-            (item) => item.product._id === product._id && item.productSize === productSize
+            (item) => item.product._id === product._id && item.size === productSize
           );
           if (existingCartItemIndex > -1) {
             cart[existingCartItemIndex].quantity++;
           } else {
             cart.push(cartItem);
           }
+          console.log(user)
           user.cart = cart;
+          console.log(user)
           updateFacebookUser(user).then((result) => {
             if (result) {
               setFacebookUser(result);
@@ -126,6 +131,9 @@ export function StateContextProvider({ children }) {
   };
 
   //TODO updateFacebookUser
+  function updateFacebookUser(user){
+    return client.patch(user._id).set({ cart: user.cart }).commit();
+  }
   
 
   //Home
@@ -172,9 +180,9 @@ export function StateContextProvider({ children }) {
       getFacebookUser(userResponse.id).then((result) => {
         if (result) {
           // Si se encontró al usuario, lo guardamos en el estado y en el local storage
-          console.log(result[0]);
-          setFacebookUser(result[0]);
-          localStorage.setItem("facebookUser", JSON.stringify(result[0]));
+          console.log(result);
+          setFacebookUser(result);
+          localStorage.setItem("facebookUser", JSON.stringify(result));
         } else {
           createFacebookUser(userResponse);
 

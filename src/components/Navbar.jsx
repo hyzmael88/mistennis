@@ -8,25 +8,25 @@ import Cart from "./Cart/Cart";
 function Navbar() {
   const { facebookUser, setFacebookUser, getFacebookUser } = AppContext();
   const [user, setUser] = useState(null);
+  const [cart, setCart] = useState(null)
 
   useEffect(() => {
-    console.log(facebookUser);
     const storedData = JSON.parse(localStorage.getItem("facebookUser"));
     setUser(storedData)
-    console.log(storedData)
-    if (storedData.cart == undefined) {
+    if (storedData?.cart == undefined) {
       console.log("entre");
-      getFacebookUser(storedData.id).then((result) => {
+      getFacebookUser(storedData?.id).then((result) => {
         if (result) {
-          console.log(result[0]);
-          setFacebookUser(result[0]);
-          setUser(result[0]);
-          localStorage.setItem("facebookUser", JSON.stringify(result[0]));
+          setFacebookUser(result);
+          setUser(result);
+          localStorage.setItem("facebookUser", JSON.stringify(result));
         }
       });
     }
+    else{
+      setCart(storedData.cart)
+    }
   }, [facebookUser, window.location.pathname]);
-  console.log(user)
 
   return (
     <div>
@@ -63,7 +63,9 @@ function Navbar() {
           )}
 
           <div>
-            <Cart />
+            <Cart
+            cart = {cart}
+            />
           </div>
           {/* <FiMenu className='text-3xl'/> */}
         </div>

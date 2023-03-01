@@ -27,5 +27,8 @@ export const size = {
         title: 'Sales',
         type: 'number'
       },
+      
+     
+    
     ],
   }
