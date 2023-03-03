@@ -1,7 +1,17 @@
 import React from 'react'
 import LoginFacebook from './LoginFacebook'
 
+/* import FacebookButton from 'react-facebook-button' */
+import {auth} from '../../firebase'
+import {FacebookAuthProvider, signInWithRedirect} from 'firebase/auth'
+
 function Auth() {
+
+  const facebookSignIn= () =>
+  {
+  const provider = new FacebookAuthProvider()
+  signInWithRedirect(auth,provider)
+  }
   return (
     
     <div className="w-full h-[850px]">
@@ -65,6 +75,7 @@ function Auth() {
                   <label className="mt-4 cursor-pointer ">Facebook</label>
                   */}
                   <LoginFacebook/>
+                  <button onClick={facebookSignIn}>Sign in with Facebook</button>
                 </div>
                 
               </div>

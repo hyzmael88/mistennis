@@ -51,6 +51,7 @@ export function StateContextProvider({ children }) {
     const product = await client.fetch(query, params);
     setProduct(product);
   };
+  
   const getFacebookUser = async (id) => {
     console.log("id dentro de getFacebooUser", id);
     const query = `*[_type == "facebookUser" && facebookId == $id]`;
@@ -102,8 +103,8 @@ export function StateContextProvider({ children }) {
         console.log(user)
         if (user) {
           const cartItem = {
-            id: `${product._id}-${productSize._key}`,
-            product: product,
+            
+            product:product,
             size: productSize,
             quantity: 1
           };

@@ -13,6 +13,8 @@ function Product() {
     getProduct(productSlug);
   }, [productSlug]);
 
+  console.log(product)
+
 
   return (
     <Fragment>

@@ -41,6 +41,7 @@ export default{
             of: [{
               type: 'object',
               fields: [
+                
                 {
                   name: 'product',
                   type: 'reference',
@@ -56,8 +57,7 @@ export default{
                   type: 'number'
                 }
               ]
-            }],
-            _key: 'id'
+            }]
           }
     ]
 }

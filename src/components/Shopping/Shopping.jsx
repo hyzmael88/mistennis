@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AppContext } from "../../context/StateContext";
 import { urlFor } from "../../lib/client";
 
 
 function Shopping() {
-  const { cart } = AppContext();
+  const [cart, setCart] = useState(null)
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem('facebookUser')).cart)
+  
+    
+  }, [cart])
   console.log(cart)
+  
 
   return (
     <div className="w-full h-full flex flex-col">
@@ -16,7 +22,7 @@ function Shopping() {
         <div className="flex flex-col w-2/3 pl-8">Form</div>
         <div className="flex flex-col w-1/3">
           <h3 className="uppercase font-bold">Summary</h3>
-          {cart.map((product) => (
+          {cart?.map((product) => (
             <div className="flex flex-row w-full h-full">
                 <div className="flex flex-col w-1/3 h-full">
                     <img src={urlFor(product?.image[0])}
