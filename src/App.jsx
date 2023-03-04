@@ -9,7 +9,7 @@ import { Routes, Route } from 'react-router-dom'
 import Products from './pages/Store'
 import Product from './pages/Product'
 import Auth from './pages/Auth/Auth'
-import Shopping from './components/Shopping/Shopping'
+import Shopping from './pages/Shopping'
 
 function App() {
   const [count, setCount] = useState(0)

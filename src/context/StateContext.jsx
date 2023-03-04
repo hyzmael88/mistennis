@@ -24,7 +24,6 @@ export function StateContextProvider({ children }) {
   const [userResponse, setUserResponse] = useState(null);
   const [facebookResponse, setFacebookResponse] = useState(null);
   const [facebookUser, setFacebookUser] = useState(null);
-  console.log(facebookUser);
 
   //Home
   const getProducts = async () => {
