@@ -94,7 +94,7 @@ export function StateContextProvider({ children }) {
     return { ...product, productSizeSelected: [selectedSize] };
   } */
   const addCart = (product, productSize) => {
-    console.log(product, productSize)
+    console.log('agregar',product, productSize)
     const storedData = JSON.parse(localStorage.getItem("facebookUser"));
     if (storedData) {
       const userId = storedData.facebookId;
@@ -107,18 +107,28 @@ export function StateContextProvider({ children }) {
             size: productSize,
             quantity: 1
           };
-          let cart = user.cart || [];
-          let existingCartItemIndex = cart.findIndex(
-            (item) => item.product._id === product._id && item.size === productSize
-          );
-          if (existingCartItemIndex > -1) {
-            cart[existingCartItemIndex].quantity++;
-          } else {
-            cart.push(cartItem);
+          let cart = user.cart ;
+          console.log(cart)
+          if(cart.length> 0){
+
+            cart.map((item) =>{
+              if(item.product._id == product._id && item.size._key == productSize.size._key){
+                cart.quantity = cart.quantity + 1
+              }
+              else{
+                cart.push(cartItem)
+              }
+            })
           }
-          console.log(user)
+          else{
+            cart.push(cartItem)
+
+          }
+          
+          console.log(cart)
+          
           user.cart = cart;
-          console.log(user)
+          console.log(cart)
           updateFacebookUser(user).then((result) => {
             if (result) {
               setFacebookUser(result);
@@ -129,6 +139,36 @@ export function StateContextProvider({ children }) {
       });
     }
   };
+
+  const deleteItemCart = (product, productSize) =>{
+    console.log(product, productSize)
+    const storedData = JSON.parse(localStorage.getItem("facebookUser"));
+    if (storedData) {
+      const userId = storedData.facebookId;
+      getFacebookUser(userId).then((user) => {
+        console.log(user)
+        if (user) {
+          let cart = user.cart
+          console.log(cart)
+          for (var i = 0; i< cart.length; i++){
+            if(cart[i].product._id == product._id && cart[i].size._key == productSize._key){
+              cart.splice(i,1)
+              break
+            }
+          }
+          user.cart = cart
+          updateFacebookUser(user).then((result) => {
+            if (result) {
+              setFacebookUser(result);
+              localStorage.setItem("facebookUser", JSON.stringify(result));
+            }
+          });
+
+          
+  }
+})
+    }
+  }
 
   //TODO updateFacebookUser
   function updateFacebookUser(user){
@@ -263,7 +303,8 @@ export function StateContextProvider({ children }) {
         setFacebookResponse,
         facebookUser,
         setFacebookUser,
-        getFacebookUser
+        getFacebookUser,
+        deleteItemCart
       }}
     >
       {children}

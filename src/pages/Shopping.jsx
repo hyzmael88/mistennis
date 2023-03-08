@@ -21,7 +21,6 @@ function Shopping() {
   console.log(cart)
 
   const totalCalc = () =>{
-    console.log(cart)
     cart?.map((item) =>(
       aux = aux +(item.size.price * item.quantity )
       
