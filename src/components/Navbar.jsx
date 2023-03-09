@@ -12,6 +12,7 @@ function Navbar() {
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("facebookUser"));
+    console.log(storedData)
     setUser(storedData)
     if (storedData?.cart == undefined) {
       console.log("entre");
@@ -27,6 +28,16 @@ function Navbar() {
       setCart(storedData.cart)
     }
   }, [facebookUser, window.location.pathname]);
+  
+  const borrarCart =() =>{
+    var carrito = JSON.parse(localStorage.getItem('facebookUser'))
+    console.log(carrito)
+    carrito.cart = []
+    console.log(carrito)
+    localStorage.setItem('facebookUser', JSON.stringify(carrito))
+
+
+  }
 
   return (
     <div>
@@ -41,8 +52,8 @@ function Navbar() {
           <span className="ml-4">Magazine</span>
         </div>
         <div className="flex flex-row items-center mr-8">
-          <div className="flex flex-row border-b-2 border-gray-400">
-            <span className="mr-2">SEARCH</span>
+          <div className="flex flex-row border-b-2 border-gray-400 cursor-pointer "  >
+            <span className="mr-2" onClick={borrarCart}>SEARCH</span>
             <FiSearch className="mt-1" />
           </div>
           {user ? (

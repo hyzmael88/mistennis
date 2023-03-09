@@ -22,7 +22,7 @@ function Shopping() {
 
   const totalCalc = () =>{
     cart?.map((item) =>(
-      aux = aux +(item.size.price * item.quantity )
+      aux = aux +(item.price * item.quantity )
       
     ))
     setSubtotal(aux)

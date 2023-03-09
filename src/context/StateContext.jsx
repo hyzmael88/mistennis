@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { client } from "../lib/client";
 
+
 const StateContext = createContext();
 
 export function StateContextProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [product, setProduct] = useState([]);
+  const [productCart, setProductCart] = useState([]);
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
@@ -95,40 +97,45 @@ export function StateContextProvider({ children }) {
   } */
   const addCart = (product, productSize) => {
     console.log('agregar',product, productSize)
+   
     const storedData = JSON.parse(localStorage.getItem("facebookUser"));
+    console.log(storedData)
     if (storedData) {
       const userId = storedData.facebookId;
       getFacebookUser(userId).then((user) => {
-        console.log(user)
+       
         if (user) {
+        
+          let carrito = storedData.cart ;
+          console.log('cart del usuario', carrito)
           const cartItem = {
             
-            product:product,
-            size: productSize,
+            id:product._id,
+            _key: Math.random().toString(36).substr(2, 9) ,
+            name: product.name,
+            image: product.image[0].asset._ref,
+            size: productSize.size,
+            price: productSize.price,
             quantity: 1
           };
-          let cart = user.cart ;
-          console.log(cart)
-          if(cart.length> 0){
-
-            cart.map((item) =>{
-              if(item.product._id == product._id && item.size._key == productSize.size._key){
-                cart.quantity = cart.quantity + 1
-              }
-              else{
-                cart.push(cartItem)
-              }
-            })
-          }
-          else{
-            cart.push(cartItem)
-
-          }
           
-          console.log(cart)
+          console.log('lo que vamos a agregar',cartItem)
+          const index = carrito.findIndex((item) => {
+            return item.id === product._id && item.size === productSize.size;
+          });
+  
+          if (index !== -1) {
+            carrito[index].quantity += 1;
+          } else {
+            carrito.push(cartItem);
+          }
+
           
-          user.cart = cart;
-          console.log(cart)
+          
+          console.log('carrito actualizado',carrito)
+          
+          user.cart = carrito;
+          console.log('carrito dentro de usuario', user)
           updateFacebookUser(user).then((result) => {
             if (result) {
               setFacebookUser(result);
@@ -140,8 +147,8 @@ export function StateContextProvider({ children }) {
     }
   };
 
-  const deleteItemCart = (product, productSize) =>{
-    console.log(product, productSize)
+  const deleteItemCart = (id) =>{
+    console.log(id)
     const storedData = JSON.parse(localStorage.getItem("facebookUser"));
     if (storedData) {
       const userId = storedData.facebookId;
@@ -151,7 +158,7 @@ export function StateContextProvider({ children }) {
           let cart = user.cart
           console.log(cart)
           for (var i = 0; i< cart.length; i++){
-            if(cart[i].product._id == product._id && cart[i].size._key == productSize._key){
+            if(cart[i].id == id ){
               cart.splice(i,1)
               break
             }
