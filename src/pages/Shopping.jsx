@@ -36,14 +36,14 @@ function Shopping() {
   return (
     <div className="w-full h-full flex flex-col">
       <div className="flex flex-col justify-center items-center my-11">
-        <h1 className="uppercase text-7xl">Shopping bag</h1>
+        <h1 className="uppercase text-4xl lg:text-7xl">Shopping bag</h1>
       </div>
-      <div className="flex flex-row w-full h-full">
-        <div className="flex flex-col w-2/3 pl-8 mr-10">
+      <div className="flex flex-col-reverse px-6 lg:px-0  lg:flex-row w-full h-full">
+        <div className="flex flex-col w-full lg:w-2/3 lg:pl-8 mt-4 lg:mt-0 mr-10">
         <Form />
         </div>
-        <div className="flex flex-col w-1/3  ">
-          <h3 className="uppercase font-bold">Summary</h3>
+        <div className="flex flex-col w-full lg:w-1/3  ">
+          <h3 className="uppercase font-bold mb-4">Summary</h3>
           {cart?.map((item) => (
            <Sumary
            item = {item}

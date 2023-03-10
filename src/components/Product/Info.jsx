@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Size from "./Size";
 import { AppContext } from "../../context/StateContext";
+import { client, urlFor } from "../../lib/client";
 
 
 function Info({ producto }) {
   const {addCart} = AppContext()
   const [productSize, setProductSize] = useState(null);
+  const [category, setCategory] = useState(null);
+
   
   useEffect(() => {
     if(producto){
@@ -13,7 +16,14 @@ function Info({ producto }) {
       setProductSize(producto.sizes[0])
     }
     
-  }, [producto])
+  }, [producto]) 
+
+  
+  useEffect(() => {
+    client
+      .fetch(`*[_id == "${producto?.category._ref}"]`)
+      .then(category => setCategory(category))
+  }, [producto?.category._ref]);
   
 
   
@@ -25,7 +35,10 @@ function Info({ producto }) {
 
   return (
     <div className="w-full h-full flex flex-col">
+           <p className="mt-6 text-md font-medium text-gray-400 ">{category && category[0] && category[0].title}</p> 
+
       <div className="flex flex-row w-full h-full justify-between items-center">
+        
         <div className="uppercase font-bold w-[300px]">{producto?.name}</div>
         <div className="uppercase font-bold ">
           {productSize ? (

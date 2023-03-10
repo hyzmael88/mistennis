@@ -15,9 +15,9 @@ function Summary({ item }) {
       <div className="flex flex-col w-1/3  mr-4">
         <img src={urlFor(item.image)} alt="snkr" />
       </div>
-      <div className="flex flex-col w-2/3 h-full mt-4">
+      <div className="flex flex-col w-2/3 h-full lg:mt-4">
         <div className="flex flex-row justify-between">
-          <p className="font-semibold uppercase text-lg">{item.name}</p>
+          <p className="font-semibold uppercase text-lg w-[150px]">{item.name}</p>
           <BsXLg className="cursor-pointer " onClick={()=> deleteItemCart(item.id)} />
         </div>
         <p>

@@ -24,7 +24,7 @@ function Sidebar() {
   
 
   return (
-    <div className="flex flex-col w-[350px]">
+    <div className="flex flex-col w-full">
       <div className="flex flex-col w-[90%] pb-6 border-b-2 ">
         <p className="uppercase font-semibold mt-4">price range</p>
         <RangeSlider minValue={minValue} maxValue={maxValue} />

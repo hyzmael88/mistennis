@@ -73,10 +73,10 @@ sortedProductsPopular.sort((a, b) => b.totalSales - a.totalSales);
           className="bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
         />
       </div>
-      <div className="flex flex-col items-center lg:hidden">
+      <div className="flex flex-col w-full items-center lg:hidden">
       <Link to="/products">
-        <button className=" font-semibold border-2 border-black py-2 w-[90%] uppercase">
-          show all
+        <button className=" font-semibold border-2 border-black px-28 py-2 uppercase">
+          <span className="font-semibold">show all</span>
         </button>
         </Link>
       </div>

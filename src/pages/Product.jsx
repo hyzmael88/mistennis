@@ -18,13 +18,13 @@ function Product() {
 
   return (
     <Fragment>
-      <div className="w-full h-full flex flex-col lg:flex-row mt-16">
+      <div className="w-full h-full flex flex-col px-8 lg:px-0  lg:flex-row mt-16">
         <div className="w-full lg:w-2/3">
           <Mosaic 
           producto = {product[0]}
           />
         </div>
-        <div className="w-full lg:w-1/3">
+        <div className="w-full mt-8 lg:mt-0 lg:w-1/3">
           <Info
           producto = {product[0]}
           />

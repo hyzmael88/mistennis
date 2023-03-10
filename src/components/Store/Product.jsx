@@ -14,13 +14,13 @@ function Product({ product }) {
   return (
     <Link to={`/products/${product.slug.current} `} className="cursor-pointer">
     
-    <div className="flex flex-col w-full h-full border-[0.5px] border-gray-100 ">
+    <div className="flex flex-col justiy-center items-center w-full h-[350px] border-[1px] lg:border-[0.5px] border-gray-300 ">
       <div className="w-[90%]">
 
       <img
         src={urlFor(product?.image[0])}
         alt="snkr"
-        className="w-[250px] h-[150px] mt-24"
+        className=" mt-14"
       />
       <div className="flex flex-row w-full h-full ">
         <div className="flex flex-col w-full">
@@ -28,7 +28,7 @@ function Product({ product }) {
             {category && category[0] && category[0].title}
           </p>
           <div className="flex flex-row w-full justify-between">
-          <p className="font-semibold uppercase w-[120px]">{product?.name}</p>
+          <p className="font-semibold uppercase w-[100px]">{product?.name}</p>
           <p className="font-semibold uppercase"> ${product?.minPrice}</p>
         </div>
         </div>

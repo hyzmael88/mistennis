@@ -74,8 +74,8 @@ function Newseason() {
     </div>
     <div className="flex flex-col items-center lg:hidden">
       <Link to="/products">
-        <button className=" font-semibold border-2 border-black py-2 w-[90%] uppercase">
-          show all
+      <button className=" font-semibold border-2 border-black px-28 py-2 uppercase">
+          <span className="font-semibold">show all</span>
         </button>
         </Link>
       </div>
