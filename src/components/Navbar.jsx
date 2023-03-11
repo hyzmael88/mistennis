@@ -46,7 +46,10 @@ function Navbar() {
           <span className="">For Her</span>
           <span className="ml-4">For Him</span>
           <span className="ml-4">Sale</span>
+          <Link to="/magazine">
+
           <span className="ml-4">Magazine</span>
+          </Link>
         </div>
         <div className="flex flex-row items-center mr-8">
           <div className="flex flex-row border-b-2 border-gray-400 cursor-pointer ">

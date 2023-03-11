@@ -12,6 +12,7 @@
     "@greatsumini/react-facebook-login": "^3.3.1",
     "@sanity/client": "^4.0.1",
     "@sanity/image-url": "^1.0.2",
+    "colorthief": "^2.4.0",
     "facebook-sdk": "^0.3.3",
     "firebase": "^9.17.2",
     "framer-motion": "^8.4.0",

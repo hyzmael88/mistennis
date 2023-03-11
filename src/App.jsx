@@ -10,6 +10,7 @@ import Products from './pages/Store'
 import Product from './pages/Product'
 import Auth from './pages/Auth/Auth'
 import Shopping from './pages/Shopping'
+import Magazine from './pages/Magazine'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -23,6 +24,7 @@ function App() {
       <Route path='/'  element={<Home/>}/> 
       <Route path='/auth'  element={<Auth/>}/> 
       <Route path='/shopping'  element={<Shopping/>}/> 
+      <Route path='/magazine'  element={<Magazine/>}/> 
       <Route path='/products'  element={<Products/>}/>
       <Route path='/products/:productSlug'  element={<Product/>}/>
       </Routes>

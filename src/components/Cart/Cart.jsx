@@ -15,14 +15,13 @@ function Cart({cart}) {
     setTotal(aux)
   }, [cart]) 
   
-  console.log(cart)
   
     
    
   return (
     <div>
 {
-        cart?.length == 0 ?
+        total == 0 ?
         <div className='border-2 border-black ml-4 rounded-full p-4'>
 
           <HiOutlineShoppingBag className=' '/>
