@@ -80,6 +80,7 @@ export function StateContextProvider({ children }) {
     const query = `*[_type == "blogPost" && slug.current == $postSlug]`;
     const params = { postSlug };
     const post = await client.fetch(query, params);
+    console.log(post)
     setPost(post);
   };
   const getCategories = async () => {

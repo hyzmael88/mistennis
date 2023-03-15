@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { HiArrowUpRight } from "react-icons/hi2";
+import { Link } from "react-router-dom";
 import { client, urlFor } from "../../lib/client";
 
 function Entries({post}) {
@@ -34,7 +35,9 @@ function Entries({post}) {
 
         <div className="mt-4 ml-4 lg:ml-0 flex flex-row justify-between lg:mt-auto">
           <span className="flex flex-row  uppercase font-bold lg:font-medium cursor-pointer mt-0 lg:mt-4 ">
+          <Link to={`/magazine/${post.slug.current} `}>
             read more &nbsp;
+             </Link>   
             <HiArrowUpRight className=" mt-2 text-xs" />
           </span>
           <span className="mr-4 text-gray-400 md:hidden">{localDate.toLocaleDateString()}</span>

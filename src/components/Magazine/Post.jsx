@@ -8,7 +8,6 @@ function Post({ item }) {
   const [fondo, setFondo] = useState(false);
   let localDate = new Date(item.publishedAt);
 
-console.log(item)
   /* function cambiarFondo(event) {
     console.log("entre");
     const colorThief = new ColorThief();

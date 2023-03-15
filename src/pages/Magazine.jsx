@@ -12,7 +12,7 @@ function Magazine() {
 
   return (
     <div className="flex flex-col w-full h-full">
-      <div className="text-8xl font-medium text-center mb-14">Magazine</div>
+      <div className="text-6xl lg:text-8xl font-medium text-center mt-4 lg:mt-0 mb-10 lg:mb-14">Magazine</div>
       <Mosaic posts={posts} />
     </div>
   );

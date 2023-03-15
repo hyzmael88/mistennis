@@ -108,16 +108,16 @@ function Navbar() {
         {
           movil?
           <div className="flex flex-col w-full h-full items-center text-center">
-            <Link to="" className="my-6 w-full ">
+            <Link to="" className="my-6 w-full " onClick={() => setMovil(false) }>
               <span className="my-4  uppercase    ">For Her</span>
             </Link>
-            <Link to="" className="my-6">
+            <Link to="" className="my-6"  onClick={() => setMovil(false) }>
               <span className="my-4 uppercase ">For Him</span>
             </Link>
-              <Link to='/products' className="my-6">
+              <Link to='/products' className="my-6"  onClick={() => setMovil(false) }>
               <span className="my-4 uppercase ">Store</span>
               </Link>
-              <Link to='/magazine' className="my-6">
+              <Link to='/magazine' className="my-6"  onClick={() => setMovil(false) }>
               <span className="my-4 uppercase ">Magazine</span>
               </Link>
               <span className="my-4 uppercase ">{user ? (
@@ -130,7 +130,7 @@ function Navbar() {
               {user.name}
             </p>
           ) : (
-            <Link to="auth" className="my-6">
+            <Link to="auth" className="my-6"  onClick={() => setMovil(false) }>
               <div className="ml-4 uppercase cursor-pointer">
                 
               </div>
