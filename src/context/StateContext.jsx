@@ -9,6 +9,7 @@ export function StateContextProvider({ children }) {
   const [product, setProduct] = useState([]);
   const [productCart, setProductCart] = useState([]);
   const [posts, setPosts] = useState([]);
+  const [post, setPost] = useState([]);
   const [categories, setCategories] = useState([]);
   const [genders, setGenders] = useState([]);
   const [cart, setCart] = useState([]);
@@ -73,6 +74,13 @@ export function StateContextProvider({ children }) {
     const query = '*[_type == "blogPost"]';
     const posts = await client.fetch(query);
     setPosts(posts);
+  };
+  const getPost = async (postSlug) => {
+    console.log(postSlug);
+    const query = `*[_type == "blogPost" && slug.current == $postSlug]`;
+    const params = { postSlug };
+    const post = await client.fetch(query, params);
+    setPost(post);
   };
   const getCategories = async () => {
     const query = '*[_type == "category"]';
@@ -285,6 +293,8 @@ export function StateContextProvider({ children }) {
         filteredProducts,
         posts,
         getPosts,
+        post,
+        getPost,
         categories,
         setCategories,
         genders,

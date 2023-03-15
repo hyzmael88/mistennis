@@ -11,6 +11,7 @@ import Product from './pages/Product'
 import Auth from './pages/Auth/Auth'
 import Shopping from './pages/Shopping'
 import Magazine from './pages/Magazine'
+import Post from './pages/Post'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +28,7 @@ function App() {
       <Route path='/magazine'  element={<Magazine/>}/> 
       <Route path='/products'  element={<Products/>}/>
       <Route path='/products/:productSlug'  element={<Product/>}/>
+      <Route path='/magazine/:postSlug'  element={<Post/>}/>
       </Routes>
      <Footer/>
 
