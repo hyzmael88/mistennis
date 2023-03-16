@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
-function Form() {
+import { loadStripe } from "@stripe/stripe-js";
 
+const stripePromise = loadStripe("VITE_PUBLIC_STRIPE_PUBLISHABLE_KEY");
+
+function Form({ cart, total }) {
+  console.log(cart);
 
   const [formData, setFormData] = useState({
     first_name: "",
@@ -18,8 +22,8 @@ function Form() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    
-    console.log(formData)
+
+    console.log(formData);
   };
 
   const handleInputChange = (event) => {
@@ -27,13 +31,37 @@ function Form() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const handleFormSubmit = async () => {
+    console.log(formData);
+    const stripe = await stripePromise;
   
-  const handleFormSubmit = (event) =>{
-    console.log(formData)
-  }
+    try {
+      const response = await fetch('http://localhost:3333/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          items: cart,
+          total: total
+        })
+      });
+  
+      const data = await response.json();
+      const { sessionId } = data;
+      
+      const result = await stripe.redirectToCheckout({
+        sessionId: sessionId
+      });
+  
+      if (result.error) {
+        console.log(result.error.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  
-  
   return (
     <div className="w-full h-full flex flex-col ">
       <h3 className="uppercase text-2xl my-4">add your delivery address</h3>
@@ -127,7 +155,6 @@ function Form() {
               name="street"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               placeholder="Street name and number"
-
               required
             />
           </div>
@@ -187,7 +214,7 @@ function Form() {
               for="house"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
-              House 
+              House
             </label>
             <input
               onChange={handleInputChange}
@@ -196,7 +223,6 @@ function Form() {
               name="house"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               placeholder="House/apartment"
-              
             />
           </div>
           <div>
@@ -217,8 +243,13 @@ function Form() {
             />
           </div>
         </div>
-        <button className="w-full bg-black text-white text-sm uppercase font-semibold py-4 mt-4" onClick={handleFormSubmit} type="submit">continue</button>
-
+        <button
+          className="w-full bg-black text-white text-sm uppercase font-semibold py-4 mt-4"
+          onClick={handleFormSubmit}
+          type="submit"
+        >
+          continue
+        </button>
       </form>
     </div>
   );

@@ -40,7 +40,10 @@ function Shopping() {
       </div>
       <div className="flex flex-col-reverse px-6 lg:px-0  lg:flex-row w-full h-full">
         <div className="flex flex-col w-full lg:w-2/3 lg:pl-8 mt-4 lg:mt-0 mr-10">
-        <Form />
+        <Form
+        cart = {cart}
+        total = {total}
+        />
         </div>
         <div className="flex flex-col w-full lg:w-1/3  ">
           <h3 className="uppercase font-bold mb-4">Summary</h3>
