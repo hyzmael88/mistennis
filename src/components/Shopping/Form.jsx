@@ -36,7 +36,7 @@ function Form({ cart, total }) {
     const stripe = await stripePromise;
   
     try {
-      const response = await fetch('http://localhost:3333/api/create-checkout-session', {
+      const response = await fetch('http://localhost:3000/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
